@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id          String      @id @default(uuid())
+  name        String
+  kata        Kata[]      @relation("CategoryToKata")
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Kata {
+  id          String    @id @default(uuid())
+  categoryId  String    // Foreign Key to Category
+  category    Category  @relation("CategoryToKata", fields: [categoryId], references: [id])
+  name        String
+  meanings    String
+  images      Image[]   // Relation to Image model
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([categoryId])
+}
+
+model Image {
+  id          String   @id @default(uuid())
+  kataId      String   // Foreign Key to Product
+  kata        Kata     @relation(fields: [kataId], references: [id], onDelete: Cascade)
+  url         String   // URL of the image
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([kataId])
+}
