@@ -4,9 +4,7 @@ import { CldUploadWidget } from "next-cloudinary";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { ImagePlus, Trash } from "lucide-react";
-import { Heading } from "./heading";
 
 interface ImageUploadProps {
   disabled?: boolean;
@@ -51,7 +49,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                 <Trash className="h-4 w-4" />
               </Button>
             </div>
-            <video className="object-cover" src={url} controls />
+            <video className="object-cover w-[100%]" src={url} controls />
           </div>
         ))}
       </div>

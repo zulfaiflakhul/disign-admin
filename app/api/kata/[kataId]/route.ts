@@ -58,7 +58,7 @@ export async function PATCH(
   try {
     const body = await req.json();
 
-    const { name, serviceId, images, categoryId } = body;
+    const { name, serviceId, videos, categoryId } = body;
 
     if (!params.kataId) {
       return new NextResponse("Product id is required", { status: 400 });
@@ -92,7 +92,7 @@ export async function PATCH(
       },
       data: {
         videos: {
-          create: [...images.map((image: { url: string }) => image)],
+          create: [...videos.map((videos: { url: string }) => videos)],
         },
       },
     });
