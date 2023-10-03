@@ -6,7 +6,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const { categoryId, name, meanings, images } = body;
+    const { categoryId, name, serviceId, videos } = body;
 
     if (!name) {
       return new NextResponse("Name is required", { status: 400 });
@@ -15,8 +15,11 @@ export async function POST(req: Request) {
     if (!categoryId) {
       return new NextResponse("Category id is required", { status: 400 });
     }
+    if (!serviceId) {
+      return new NextResponse("Service id is required", { status: 400 });
+    }
 
-    if (!images || !images.length) {
+    if (!videos || !videos.length) {
       return new NextResponse("Images are required", { status: 400 });
     }
 
@@ -24,9 +27,9 @@ export async function POST(req: Request) {
       data: {
         categoryId,
         name,
-        meanings,
-        images: {
-          create: [...images.map((image: { url: string }) => image)],
+        serviceId,
+        videos: {
+          create: [...videos.map((videos: { url: string }) => videos)],
         },
       },
     });
@@ -42,14 +45,17 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const categoryId = searchParams.get("categoryId") || undefined;
+    const serviceId = searchParams.get("serviceId") || undefined;
 
     const kata = await prismadb.kata.findMany({
       where: {
         categoryId,
+        serviceId,
       },
       include: {
-        images: true,
+        videos: true,
         category: true,
+        service: true,
       },
       orderBy: {
         createdAt: "desc",

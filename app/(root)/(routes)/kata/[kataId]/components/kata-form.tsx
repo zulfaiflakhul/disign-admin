@@ -16,7 +16,6 @@ import ImageUpload from "@/components/ui/image-upload";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -33,13 +32,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Kata, Image } from "@prisma/client";
-import { Textarea } from "@/components/ui/textarea";
+import { Kata, Service, Videos } from "@prisma/client";
 
 const formSchema = z.object({
   name: z.string().min(1),
-  images: z.object({ url: z.string() }).array(),
-  meanings: z.string().min(1),
+  videos: z.object({ url: z.string() }).array(),
+  serviceId: z.string().min(1),
   categoryId: z.string().min(1),
 });
 
@@ -48,15 +46,17 @@ type KataFormValues = z.infer<typeof formSchema>;
 interface KataFormProps {
   initialData:
     | (Kata & {
-        images: Image[];
+        videos: Videos[];
       })
     | null;
   categories: Category[];
+  services: Service[];
 }
 
 export const KataForm: React.FC<KataFormProps> = ({
   initialData,
   categories,
+  services,
 }) => {
   const params = useParams();
   const router = useRouter();
@@ -64,17 +64,17 @@ export const KataForm: React.FC<KataFormProps> = ({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const title = initialData ? "Edit product" : "Create product";
-  const description = initialData ? "Edit a product." : "Add a new product";
-  const toastMessage = initialData ? "Product updated." : "Product created.";
+  const title = initialData ? "Edit Kata" : "Create Kata";
+  const description = initialData ? "Edit a Kata." : "Add a new Kata";
+  const toastMessage = initialData ? "Kata updated." : "Kata created.";
   const action = initialData ? "Save changes" : "Create";
 
   const form = useForm<KataFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData || {
       name: "",
-      images: [],
-      meanings: "",
+      videos: [],
+      serviceId: "",
       categoryId: "",
     },
   });
@@ -138,7 +138,7 @@ export const KataForm: React.FC<KataFormProps> = ({
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-8 w-full">
-          <h1 className="text-black font-bold text-xl">Product Details</h1>
+          <h1 className="text-black font-bold text-xl">Kata</h1>
           <div className="md:grid md:grid-cols-3 gap-8">
             <FormField
               control={form.control}
@@ -188,36 +188,48 @@ export const KataForm: React.FC<KataFormProps> = ({
                 </FormItem>
               )}
             />
-          </div>
-          <div className="md:grid md:grid-cols-2 gap-8">
             <FormField
               control={form.control}
-              name="meanings"
+              name="serviceId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="font-bold text-md">
-                    Description
-                  </FormLabel>
-                  <FormControl>
-                    <Textarea
-                      disabled={loading}
-                      placeholder="Product description"
-                      {...field}
-                    />
-                  </FormControl>
+                  <FormLabel className="font-bold text-md">Service</FormLabel>
+                  <Select
+                    disabled={loading}
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue
+                          defaultValue={field.value}
+                          placeholder="Select a service"
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {services.map((service) => (
+                        <SelectItem key={service.id} value={service.id}>
+                          {service.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
             />
+          </div>
+          <div className="md:grid md:grid-cols-1 gap-8">
             <FormField
               control={form.control}
-              name="images"
+              name="videos"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Images</FormLabel>
+                  <FormLabel>Videos</FormLabel>
                   <FormControl>
                     <ImageUpload
-                      value={field.value.map((image) => image.url)}
+                      value={field.value.map((videos) => videos.url)}
                       disabled={loading}
                       onChange={(url) =>
                         field.onChange([...field.value, { url }])

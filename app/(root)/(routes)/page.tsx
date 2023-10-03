@@ -1,5 +1,9 @@
-import Image from "next/image";
+const DashboardPage = () => {
+  return (
+    <>
+      <div>Dashboard</div>
+    </>
+  );
+};
 
-export default function Home() {
-  return <div>Page</div>;
-}
+export default DashboardPage;

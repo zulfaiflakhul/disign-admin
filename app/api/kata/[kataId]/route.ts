@@ -17,7 +17,8 @@ export async function GET(
       },
       include: {
         category: true,
-        images: true,
+        service: true,
+        videos: true,
       },
     });
 
@@ -57,7 +58,7 @@ export async function PATCH(
   try {
     const body = await req.json();
 
-    const { name, meanings, images, categoryId } = body;
+    const { name, serviceId, images, categoryId } = body;
 
     if (!params.kataId) {
       return new NextResponse("Product id is required", { status: 400 });
@@ -77,9 +78,9 @@ export async function PATCH(
       },
       data: {
         name,
-        meanings,
+        serviceId,
         categoryId,
-        images: {
+        videos: {
           deleteMany: {},
         },
       },
@@ -90,7 +91,7 @@ export async function PATCH(
         id: params.kataId,
       },
       data: {
-        images: {
+        videos: {
           create: [...images.map((image: { url: string }) => image)],
         },
       },

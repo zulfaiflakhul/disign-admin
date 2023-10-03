@@ -6,20 +6,21 @@ import { KataColumn } from "./components/columns";
 import { KataClient } from "./components/client";
 
 const KataPage = async ({}) => {
-  const products = await prismadb.kata.findMany({
+  const kata = await prismadb.kata.findMany({
     orderBy: {
       createdAt: "desc",
     },
     include: {
       category: true,
+      service: true,
     },
   });
 
-  const formattedKata: KataColumn[] = products.map((item) => ({
+  const formattedKata: KataColumn[] = kata.map((item) => ({
     id: item.id,
     name: item.name,
     category: item.category.name,
-    meanings: item.meanings,
+    service: item.service.name,
     createdAt: format(item.createdAt, "MMMM do, yyyy"),
   }));
   return (

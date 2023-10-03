@@ -4,26 +4,16 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { CellAction } from "./cell-action";
 
-export type KataColumn = {
+export type ServiceColumn = {
   id: string;
   name: string;
-  category: string;
-  service: string;
   createdAt: string;
 };
 
-export const columns: ColumnDef<KataColumn>[] = [
+export const columns: ColumnDef<ServiceColumn>[] = [
   {
     accessorKey: "name",
     header: "Name",
-  },
-  {
-    accessorKey: "category",
-    header: "Category",
-  },
-  {
-    accessorKey: "service",
-    header: "Services",
   },
   {
     accessorKey: "createdAt",

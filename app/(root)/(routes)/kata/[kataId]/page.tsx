@@ -8,7 +8,8 @@ const KataPage = async ({ params }: { params: { kataId: string } }) => {
     },
     include: {
       category: true,
-      images: true,
+      service: true,
+      videos: true,
     },
   });
 
@@ -18,10 +19,20 @@ const KataPage = async ({ params }: { params: { kataId: string } }) => {
     },
   });
 
+  const services = await prismadb.service.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-11 pt-6">
-        <KataForm initialData={kata} categories={categories} />
+        <KataForm
+          initialData={kata}
+          services={services}
+          categories={categories}
+        />
       </div>
     </div>
   );

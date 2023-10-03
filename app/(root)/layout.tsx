@@ -23,8 +23,8 @@ const sidebarNavItems = [
     href: "/categories",
   },
   {
-    title: "User",
-    href: "/user",
+    title: "Layanan",
+    href: "/services",
   },
 ];
 
