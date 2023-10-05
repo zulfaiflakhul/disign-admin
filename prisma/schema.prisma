@@ -6,48 +6,48 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model Category {
-  id          String      @id @default(uuid())
-  name        String
+  id          String      @id @default(uuid()) @unique
+  name        String      @db.VarChar(150)
   kata        Kata[]      @relation("CategoryToKata")
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 }
 
 model Service {
-  id          String      @id @default(uuid())
-  name        String
+  id          String      @id @default(uuid()) @unique
+  name        String      @db.VarChar(150)
   kata        Kata[]      @relation("ServiceToKata")
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 }
 
 model Kata {
-  id          String    @id @default(uuid())
-  categoryId  String    // Foreign Key to Category
-  serviceId   String    // Foreign Key to Service
-  category    Category  @relation("CategoryToKata", fields: [categoryId], references: [id])
-  service     Service   @relation("ServiceToKata", fields: [serviceId], references: [id])
-  name        String
-  videos      Videos[]   // Relation to Image model
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id          String      @id @default(uuid()) @unique
+  categoryId  String      // Foreign Key to Category
+  serviceId   String         // Foreign Key to Service
+  category    Category    @relation("CategoryToKata", fields: [categoryId], references: [id])
+  service     Service     @relation("ServiceToKata", fields: [serviceId], references: [id])
+  name        String      @db.VarChar(150)
+  videos      Videos[]    // Relation to Image model
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 
   @@index([categoryId])
   @@index([serviceId])
 }
 
 model Videos {
-  id          String   @id @default(uuid())
-  kataId      String   // Foreign Key to Product
-  kata        Kata     @relation(fields: [kataId], references: [id], onDelete: Cascade)
-  url         String   // URL of the image
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id          String      @id @default(uuid()) @unique
+  kataId      String      // Foreign Key to Product
+  kata        Kata        @relation(fields: [kataId], references: [id], onDelete: Cascade)
+  url         String      // URL of the image
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 
   @@index([kataId])
 }
