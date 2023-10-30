@@ -4,6 +4,7 @@ import prismadb from "@/lib/prisma";
 
 import { ServiceColumn } from "./components/columns";
 import { ServicesClient } from "./components/client";
+import { revalidatePath } from "next/cache";
 
 const ServicesPage = async ({}) => {
   const services = await prismadb.service.findMany({
@@ -11,6 +12,8 @@ const ServicesPage = async ({}) => {
       createdAt: "desc",
     },
   });
+
+  revalidatePath("/services");
 
   const formattedServices: ServiceColumn[] = services.map((item) => ({
     id: item.id,
