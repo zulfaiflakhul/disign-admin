@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import prismadb from "@/lib/prisma";
 import { KataForm } from "./components/kata-form";
 

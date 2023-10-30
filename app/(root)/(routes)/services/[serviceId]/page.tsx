@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import prismadb from "@/lib/prisma";
 import { ServiceForm } from "./components/service-form";
 
