@@ -9,25 +9,20 @@ export type KataColumn = {
   name: string;
   category: string;
   service: string;
-  createdAt: string;
 };
 
 export const columns: ColumnDef<KataColumn>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: "Judul",
   },
   {
     accessorKey: "category",
-    header: "Category",
+    header: "Kategori",
   },
   {
     accessorKey: "service",
-    header: "Services",
-  },
-  {
-    accessorKey: "createdAt",
-    header: "Date",
+    header: "Layanan",
   },
   {
     id: "actions",

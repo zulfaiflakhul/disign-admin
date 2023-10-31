@@ -39,7 +39,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         {value.map((url) => (
           <div
             key={url}
-            className="relative w-[50%] h-[50%] rounded-md overflow-hidden">
+            className="relative md:w-[50%] md:h-[50%] rounded-md overflow-hidden">
             <div className="z-10 absolute top-2 right-2">
               <Button
                 type="button"

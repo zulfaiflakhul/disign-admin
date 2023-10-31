@@ -19,13 +19,13 @@ export const CategoriesClient: React.FC<CategoriesClientProps> = ({ data }) => {
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-5">
         <Heading
-          title={`Categories (${data.length})`}
-          description="Manage categories for your dictionary"
+          title={`Kategori (${data.length})`}
+          description="Kelola Kategori Data di Kamus DiSign"
         />
         <Button onClick={() => router.push(`/categories/new`)}>
-          <Plus className="mr-2 h-4 w-4" /> Add New
+          Tambah Kategori
         </Button>
       </div>
       <Separator />

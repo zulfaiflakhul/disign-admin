@@ -19,13 +19,13 @@ export const ServicesClient: React.FC<ServicesClientProps> = ({ data }) => {
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-5">
         <Heading
           title={`Layanan (${data.length})`}
-          description="Kelola layanan untuk kamus DiSign"
+          description="Kelola layanan yang dijangkau kamus DiSign"
         />
         <Button onClick={() => router.push(`/services/new`)}>
-          <Plus className="mr-2 h-4 w-4" /> Add New
+          Tambah Layanan
         </Button>
       </div>
       <Separator />

@@ -13,11 +13,11 @@ export type ServiceColumn = {
 export const columns: ColumnDef<ServiceColumn>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: "Nama",
   },
   {
     accessorKey: "createdAt",
-    header: "Date",
+    header: "Tanggal",
   },
   {
     id: "actions",

@@ -41,11 +41,6 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
     }
   };
 
-  const onCopy = (id: string) => {
-    navigator.clipboard.writeText(id);
-    toast.success("Coupon ID copied to clipboard.");
-  };
-
   return (
     <>
       <AlertModal
@@ -63,9 +58,6 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => onCopy(data.id)}>
-            <Copy className="mr-2 h-4 w-4" /> Copy Id
-          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => router.push(`/kata/${data.id}`)}>
             <Edit className="mr-2 h-4 w-4" /> Update
           </DropdownMenuItem>

@@ -12,7 +12,7 @@ const CategoryPage = async ({ params }: { params: { categoryId: string } }) => {
 
   return (
     <div className="flex-col">
-      <div className="flex-1 space-y-4 p-11 pt-6">
+      <div className="flex-1 md:space-y-4 md:p-11 pt-6">
         <CategoryForm initialData={category} />
       </div>
     </div>

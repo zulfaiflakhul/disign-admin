@@ -24,3 +24,18 @@ export async function POST(req: Request) {
     return new NextResponse("Internal error", { status: 500 });
   }
 }
+
+export async function GET(req: Request) {
+  try {
+    const service = await prismadb.service.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return NextResponse.json(service);
+  } catch (error) {
+    console.log("[SERVICE_GET]", error);
+    return new NextResponse("Internal error", { status: 500 });
+  }
+}

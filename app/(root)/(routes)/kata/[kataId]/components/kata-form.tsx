@@ -64,10 +64,14 @@ export const KataForm: React.FC<KataFormProps> = ({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const title = initialData ? "Edit Kata" : "Create Kata";
-  const description = initialData ? "Edit a Kata." : "Add a new Kata";
+  const title = initialData
+    ? "Edit Data Kata / Kalimat"
+    : "Tambahkan Data Kata / Kalimat Baru";
+  const description = initialData
+    ? "Edit Data"
+    : "Menambahkan Data Kata / Kalimat Baru";
   const toastMessage = initialData ? "Kata updated." : "Kata created.";
-  const action = initialData ? "Save changes" : "Create";
+  const action = initialData ? "Simpan" : "Tambah";
 
   const form = useForm<KataFormValues>({
     resolver: zodResolver(formSchema),
@@ -137,21 +141,19 @@ export const KataForm: React.FC<KataFormProps> = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-full">
-          <h1 className="text-black font-bold text-xl">Kata</h1>
+          className="space-y-8 w-full mt-5">
+          <h1 className="text-black font-bold text-xl">Data Kata & Kalimat</h1>
           <div className="md:grid md:grid-cols-3 gap-8">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="font-bold text-md">Name</FormLabel>
+                  <FormLabel className="font-bold text-md">
+                    Judul / Nama
+                  </FormLabel>
                   <FormControl>
-                    <Input
-                      disabled={loading}
-                      placeholder="Product name"
-                      {...field}
-                    />
+                    <Input disabled={loading} placeholder="Judul" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -162,7 +164,7 @@ export const KataForm: React.FC<KataFormProps> = ({
               name="categoryId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="font-bold text-md">Category</FormLabel>
+                  <FormLabel className="font-bold text-md">Kategori</FormLabel>
                   <Select
                     disabled={loading}
                     onValueChange={field.onChange}
@@ -193,7 +195,7 @@ export const KataForm: React.FC<KataFormProps> = ({
               name="serviceId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="font-bold text-md">Service</FormLabel>
+                  <FormLabel className="font-bold text-md">Layanan</FormLabel>
                   <Select
                     disabled={loading}
                     onValueChange={field.onChange}
@@ -220,7 +222,7 @@ export const KataForm: React.FC<KataFormProps> = ({
               )}
             />
           </div>
-          <div className="md:grid md:grid-cols-1 gap-8">
+          <div className="grid grid-cols-1 gap-8">
             <FormField
               control={form.control}
               name="videos"

@@ -19,14 +19,12 @@ export const KataClient: React.FC<KataClientProps> = ({ data }) => {
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-5">
         <Heading
-          title={`Kata (${data.length})`}
-          description="Kelola Kata Untuk Kamus DiSign"
+          title={`Data (${data.length})`}
+          description="Kelola Data Kata & Kalimat Untuk Kamus DiSign"
         />
-        <Button onClick={() => router.push(`/kata/new`)}>
-          <Plus className="mr-2 h-4 w-4" /> Add New
-        </Button>
+        <Button onClick={() => router.push(`/kata/new`)}>Tambah Data</Button>
       </div>
       <Separator />
       <DataTable searchKey="name" columns={columns} data={data} />

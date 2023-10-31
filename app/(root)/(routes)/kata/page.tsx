@@ -1,9 +1,6 @@
 export const dynamic = "force-dynamic";
 
-import { format } from "date-fns";
-
 import prismadb from "@/lib/prisma";
-
 import { KataColumn } from "./components/columns";
 import { KataClient } from "./components/client";
 
@@ -23,12 +20,11 @@ const KataPage = async ({}) => {
     name: item.name,
     category: item.category.name,
     service: item.service.name,
-    createdAt: format(item.createdAt, "MMMM do, yyyy"),
   }));
   return (
     <>
       <div className="flex-col">
-        <div className="flex-1 space-y-4 p-11 pt-6">
+        <div className="flex-1 md:space-y-4 md:p-11 pt-6">
           <KataClient data={formattedKata} />
         </div>
       </div>

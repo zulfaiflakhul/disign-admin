@@ -42,7 +42,9 @@ export const ServiceForm: React.FC<ServiceFormProps> = ({ initialData }) => {
   const [loading, setLoading] = useState(false);
 
   const title = initialData ? "Edit Layanan" : "Tambahkan layanan";
-  const description = initialData ? "Edit layanan" : "Tambahkan Layanan";
+  const description = initialData
+    ? "Edit layanan"
+    : "Tambahkan Layanan Jangkauan Kamus DiSign";
   const toastMessage = initialData
     ? "Layanan Diperbarui"
     : "Layanan Berhasil Dibuat";
@@ -115,18 +117,18 @@ export const ServiceForm: React.FC<ServiceFormProps> = ({ initialData }) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-full">
+          className="space-y-8 w-full mt-5">
           <div className="md:grid md:grid-cols-3 gap-8">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="font-bold text-md">Name</FormLabel>
+                  <FormLabel className="font-bold text-md">Nama</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="Category name"
+                      placeholder="Nama Layanan"
                       {...field}
                     />
                   </FormControl>

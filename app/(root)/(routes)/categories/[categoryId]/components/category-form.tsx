@@ -41,10 +41,10 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({ initialData }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const title = initialData ? "Edit category" : "Create category";
-  const description = initialData ? "Edit a category." : "Add a new category";
-  const toastMessage = initialData ? "Category updated." : "Category created.";
-  const action = initialData ? "Save changes" : "Create";
+  const title = initialData ? "Edit Kategori" : "Tambah Kategori";
+  const description = initialData ? "Edit Kategori." : "Tambah Kategori Baru";
+  const toastMessage = initialData ? "Kategori diupdate." : "Kategori dibuat.";
+  const action = initialData ? "Simpan" : "Tambah";
 
   const form = useForm<CategoryFormValues>({
     resolver: zodResolver(formSchema),
@@ -113,18 +113,18 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({ initialData }) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-full">
+          className="space-y-8 w-full mt-5">
           <div className="md:grid md:grid-cols-3 gap-8">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="font-bold text-md">Name</FormLabel>
+                  <FormLabel className="font-bold text-md">Nama</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="Category name"
+                      placeholder="Nama Kategori"
                       {...field}
                     />
                   </FormControl>

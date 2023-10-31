@@ -55,7 +55,7 @@ export function DataTable<TData, TValue>({
           onChange={(event) =>
             table.getColumn(searchKey)?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="max-w-full md:max-w-sm"
         />
       </div>
       <div className="rounded-md border">
@@ -65,7 +65,7 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="font-semibold">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
